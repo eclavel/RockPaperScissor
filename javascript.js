@@ -1,8 +1,12 @@
+/*
+//returns a random choice from the three options available
 function getComputerChoice(){
     let choices = ['Rock', 'Paper', 'Scissor'];
     let computerChoice = choices[Math.floor(Math.random() * choices.length)];
     return computerChoice;
 }
+
+//Returns the choice that wins 
 function playRound(playerSelection, computerChoice){
     console.log(computerChoice);
     console.log(playerSelection);
@@ -40,7 +44,7 @@ function playRound(playerSelection, computerChoice){
         }
     }
 }
-
+//gets players choice and makes it case-insensitive then plays 5 rounds only
 function game(){
     for(let i = 0; i < 5; i++){
        let playerInput = prompt('Choose: Rock, Paper, or Scissor','Rock');
@@ -50,3 +54,5 @@ function game(){
 }
 
 game();
+
+*/
