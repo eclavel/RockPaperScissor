@@ -1,4 +1,7 @@
-/*
+let you = 0;
+let enemy = 0;
+const h3 = document.querySelector('h3');
+const result = document.querySelector('h3');
 //returns a random choice from the three options available
 function getComputerChoice(){
     let choices = ['Rock', 'Paper', 'Scissor'];
@@ -8,51 +11,83 @@ function getComputerChoice(){
 
 //Returns the choice that wins 
 function playRound(playerSelection, computerChoice){
-    console.log(computerChoice);
-    console.log(playerSelection);
     if(playerSelection == 'Rock'){
         if(computerChoice == 'Paper'){
-            return 'You Lose! Paper beats Rock';
+            h3.style.color = 'red';
+            result.textContent = 'You Lose! 📃 Beats 🪨';
+            ++enemy;
         }
         else if(computerChoice == 'Scissor'){
-            return 'You Win! Rock beats Scissor';
+            h3.style.color = 'chartreuse';
+            result.textContent = 'You Win! 🪨 Beats ✂️';
+            ++you;
         }
         else{
-            return 'Tie!';
+            h3.style.color = 'yellow';
+            result.textContent = 'TIE!';
         }
     }
     else if(playerSelection == 'Paper'){
         if(computerChoice == 'Rock'){
-            return 'You Win! Paper beats Rock';
+            h3.style.color = 'chartreuse';
+            result.textContent = 'You Win! 📃 Beats 🪨';
+            ++you;
         }
         else if(computerChoice == 'Scissor'){
-            return 'You Lose! Scissor beats Paper';
+            h3.style.color = 'red';
+            result.textContent = 'You Lose! ✂️ Beats 📃';
+            ++enemy;
         }
         else{
-            return 'Tie!';
+            h3.style.color = 'yellow';
+            result.textContent = 'TIE!';
         }
     }
     else if(playerSelection == 'Scissor'){
         if(computerChoice == 'Rock'){
-            return 'You Lose! Rock beats Scissor';
+            h3.style.color = 'red';
+            result.textContent = 'You Lose! 🪨 Beats ✂️';
+            ++enemy;
         }
         else if(computerChoice == 'Paper'){
-            return 'You win! Scissor beats Paper';
+            h3.style.color = 'chartreuse';
+            result.textContent = 'You Win! ✂️ Beats 📃';
+            ++you;
         }
         else{
-            return 'Tie!';
+            h3.style.color = 'yellow';
+            result.textContent = 'TIE!';
         }
     }
-}
-//gets players choice and makes it case-insensitive then plays 5 rounds only
-function game(){
-    for(let i = 0; i < 5; i++){
-       let playerInput = prompt('Choose: Rock, Paper, or Scissor','Rock');
-       let playerSelection = playerInput.charAt(0).toUpperCase() + playerInput.slice(1).toLowerCase();
-       console.log(playRound(playerSelection,getComputerChoice()));
+    updateScore();
+    //end game
+    if(you === 5 || enemy === 5){
+        gameOver();
     }
 }
 
-game();
+function updateScore(){
+    let score = document.querySelector('h4');
+    score.textContent = `You: ${you} Enemy: ${enemy}`;
+}
 
-*/
+function gameOver(){
+    if(you === 5){
+        confirm('You Have Beaten Your Enemy! Play Again');
+    }
+    else{
+        confirm('Your Enemy Has Won :(  Try Again');
+    }
+    // reset everything back
+    you = 0;
+    enemy = 0;
+    updateScore();
+    h3.style.color = 'black';
+    result.textContent = 'Result';
+}
+
+let button = document.querySelectorAll('button');
+button.forEach(element => {
+    element.addEventListener('click', () => playRound(element.classList.value, getComputerChoice()));
+});
+
